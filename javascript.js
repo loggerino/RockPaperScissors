@@ -1,3 +1,8 @@
+const selectionButtons = document.querySelectorAll('.selection-btn');
+const descriptionDiv = document.querySelector('.description');
+const resultDiv = document.querySelector('.result');
+const restartButton = document.querySelector('#restart-btn');
+
 let playerScore = 0;
 let computerScore = 0;
 let roundToWin = 5;
@@ -9,41 +14,71 @@ function getComputerChoice() {
 
 function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
-        return "Tie!";
+        alert("Tie!");
     } else if (playerSelection === 'rock' && computerSelection === 'scissors' ||
         playerSelection === 'paper' && computerSelection === 'rock' ||
         playerSelection === 'scissors' && computerSelection === 'paper') {
         playerScore++;
-        return `You win! ${playerSelection} beats ${computerSelection}`;
+        alert(`You win! ${playerSelection} beats ${computerSelection}`);
     } else {
         computerScore++;
-        return `You lose! ${computerSelection} beats ${playerSelection}`;
+        alert(`You lose! ${computerSelection} beats ${playerSelection}`);
     }
 }
 
-function getPlayerChoice() {
-    let choice = prompt("Choose rock paper scissors");
-    while (choice !== "rock" && choice !== "paper" && choice !== "scissors") {
-        choice = prompt("Invalid Choice");
-    }
-    return choice;
+function updateScore() {
+    resultDiv.innerHTML = `<p>Player: ${playerScore}</p><p>Computer: ${computerScore}</p>`;
 }
 
-function game() {
-    while (playerScore < roundToWin && computerScore < roundToWin) {
-        const computerSelection = getComputerChoice();
-        const playerSelection = getPlayerChoice();
-        prompt(playRound(playerSelection, computerSelection));
-    }
-
+function resetScore() {
+    playerScore = 0;
+    computerScore = 0;
+    updateScore();
+}
+function endGame() {
     if (playerScore > computerScore) {
-        prompt("Congratulations! You won the game!");
+        resultDiv.innerHTML += "<p>Congratulations! You won the game!</p>";
     } else if (playerScore < computerScore) {
-        prompt("Sorry, you lost the game.");
+        resultDiv.innerHTML += "<p>Sorry, you lost the game.</p>";
     } else {
-        prompt("It's a tie game.");
+        resultDiv.innerHTML += "<p>It's a tie game.</p>";
+    }
+    for (const button of selectionButtons) {
+        button.disabled = true;
     }
 }
 
+function startGame() {
+    resetScore();
+    resultDiv.innerHTML = "";
+    for (const button of selectionButtons) {
+        button.disabled = false;
+    }
+}
 
-game();
+function handleClick(event) {
+    const playerSelection = event.target.dataset.selection;
+    const computerSelection = getComputerChoice();
+    const result = playRound(playerSelection, computerSelection);
+    resultDiv.innerHTML += `<p>${result}</p>`;
+    updateScore();
+
+    if (playerScore >= roundToWin || computerScore >= roundToWin) {
+        endGame();
+    }
+}
+
+for (const button of selectionButtons) {
+    button.addEventListener('click', handleClick);
+}
+
+function restartGame() {
+    startGame();
+}
+
+for (const button of selectionButtons) {
+    button.addEventListener('click', handleClick);
+}
+
+restartButton.addEventListener('click', restartGame);
+
