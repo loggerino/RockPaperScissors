@@ -14,15 +14,15 @@ function getComputerChoice() {
 
 function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
-        alert("Tie!");
+        descriptionDiv.innerHTML += "<p>Tie!</p>";
     } else if (playerSelection === 'rock' && computerSelection === 'scissors' ||
         playerSelection === 'paper' && computerSelection === 'rock' ||
         playerSelection === 'scissors' && computerSelection === 'paper') {
         playerScore++;
-        alert(`You win! ${playerSelection} beats ${computerSelection}`);
+        descriptionDiv.innerHTML += `<p>You win! ${playerSelection} beats ${computerSelection}</p>`;
     } else {
         computerScore++;
-        alert(`You lose! ${computerSelection} beats ${playerSelection}`);
+        descriptionDiv.innerHTML += `<p>You lose! ${computerSelection} beats ${playerSelection}</p>`;
     }
 }
 
@@ -51,6 +51,7 @@ function endGame() {
 function startGame() {
     resetScore();
     resultDiv.innerHTML = "";
+    descriptionDiv.innerHTML = "";
     for (const button of selectionButtons) {
         button.disabled = false;
     }

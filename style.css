@@ -1,0 +1,66 @@
+* {
+    background-color: bisque;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.title {
+    text-align: center;
+    color: #333;
+}
+
+.selection {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.selection-btn {
+    font-size: 16px;
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #EEE;
+    border: 2px solid #CCC;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.selection-btn:hover {
+    background-color: #DDD;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.result {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+button {
+    font-size: 16px;
+    width: 100px;
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #EEE;
+    border: 2px solid #CCC;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+    background-color: #DDD;
+}
+
+#restart-btn {
+    display: block;
+    margin: 20px auto 0;
+}
